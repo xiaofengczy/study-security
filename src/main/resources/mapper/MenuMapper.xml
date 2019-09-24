@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.security.dao.mapper.MenuMapper">
+  <select
+    id="getAllMenus"
+    resultMap="BaseResultMap">
+   select  m.*,r.id as rid,r.name as rname,r.nameZh as rnamZh from menu m left join
+   menu_role  mr on m.id = mr.mid left join role r on mr.rid = r.id
+  </select>
+  <resultMap id="BaseResultMap" type="com.study.security.dao.entity.Menu">
+    <id property="id" column="id"/>
+    <result property="pattern" column="parttern"/>
+    <collection property="roles" ofType="com.study.security.dao.entity.Role">
+      <id property="id" column="rid"/>
+      <result property="name" column="rname"/>
+      <result property="nameZh" column="rnamZh"/>
+    </collection>
+  </resultMap>
+
+</mapper>
